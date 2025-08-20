@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIC Portal - Admin Dashboard</title>
+    <link rel="stylesheet" href="plans.css">
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>LIC Portal - Admin Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="plans.html">View Plans</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Section 1: Policy Management -->
+        <section class="admin-section">
+            <h2>Policy Management</h2>
+            <p>Add, edit, or delete policies that appear on the website.</p>
+            <button id="showAddPolicyFormBtn" class="btn" style="margin: 20px 0;">+ Add New Policy</button>
+            <div class="policy-table-container">
+                <table id="policiesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Policy Name</th>
+                            <th>Age Range</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody><!-- Policy rows will be inserted here --></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 2: Administrator Management -->
+        <section class="admin-section">
+            <h2>Administrator Management</h2>
+            <div class="admin-management-layout">
+                <div class="admin-list">
+                    <h3>Current Admins</h3>
+                    <ul id="adminList"></ul>
+                </div>
+                <div class="add-admin-form">
+                    <h3>Add New Admin</h3>
+                    <form id="addAdminForm" class="auth-form">
+                        <input type="text" id="adminUsername" placeholder="New Admin Username" required>
+                        <input type="email" id="adminEmail" placeholder="New Admin Email" required>
+                        <input type="password" id="adminPassword" placeholder="Temporary Password" required>
+                        <button type="submit" class="btn">Create Admin</button>
+                    </form>
+                    <p id="adminMessage" class="auth-message"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Adding/Editing Policies -->
+    <div id="policyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modalTitle">Add New Policy</h3>
+            <form id="policyForm" class="auth-form">
+                <input type="hidden" id="policyId">
+                <input type="text" id="policyName" placeholder="Policy Name" required>
+                <input type="number" id="minAge" placeholder="Minimum Age" required>
+                <input type="number" id="maxAge" placeholder="Maximum Age" required>
+                <textarea id="description" placeholder="Description" rows="3"></textarea>
+                <textarea id="rateTable" placeholder='Rate Table (JSON format, e.g., { "20": 45.50 })'></textarea>
+                <input type="text" id="bonus" placeholder="Bonus Feature">
+                <button type="submit" class="btn">Save Policy</button>
+            </form>
+            <p id="policyMessage" class="auth-message"></p>
+        </div>
+    </div>
+
+    <script src="admin.js"></script> <!-- We will move the script to its own file -->
+</body>
+</html>

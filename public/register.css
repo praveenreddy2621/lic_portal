@@ -1,0 +1,77 @@
+/* =============================================
+   STYLES FOR LOGIN, REGISTER, & ADMIN PAGES
+   ============================================= */
+
+/* This container will hold our form and center it nicely */
+.auth-container {
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.auth-container h3 {
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+/* Style the form to stack elements vertically */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Make form inputs and buttons take up the full width of the container */
+.auth-form input,
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* The button should use the styles we already defined in plans.css */
+.auth-form button {
+    margin-top: 10px;
+}
+
+/* Style for the success or error messages (e.g., "Login successful!") */
+.auth-message {
+    margin-top: 15px;
+    font-weight: bold;
+    min-height: 20px; /* Prevents layout shift when message appears */
+}
+
+/* Style for the link to switch between login/register pages */
+.switch-form-link {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.switch-form-link a {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+.switch-form-link a:hover {
+    text-decoration: underline;
+}
+
+/* Specific style for the logout button on the admin page */
+#logoutBtn {
+    background-color: #c82333; /* A darker red */
+    border-color: #bd2130;
+    margin-top: 30px;
+}
+
+#logoutBtn:hover {
+    background-color: #dc3545;
+}
+

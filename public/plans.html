@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIC Portal - Plans</title>
+    <link rel="stylesheet" href="plans.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="footer.css">
+
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>LIC PORTAL</h1>
+            <p>Your Trusted Life Insurance Partner</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="plans.html" class="active">Plans</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li id="welcome-message"></li>
+                <li id="auth-link"></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- Age-based Eligibility Check -->
+    <section class="eligibility-check container">
+        <h3>Find Your Perfect Plan</h3>
+        <div class="eligibility-form">
+            <input type="number" id="userAgeCheck" placeholder="Enter your age" min="0" max="100">
+            <button id="checkEligibilityBtn" class="btn">Show Eligible Plans</button>
+        </div>
+    </section>
+
+    <!-- Container for dynamically generated plans -->
+    <section class="plans-container container">
+        <div id="eligiblePlans" class="plans-grid">
+            <!-- JavaScript will populate eligible plans here -->
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features container">
+        <h2 class="section-title">Why Choose LIC Plans?</h2>
+        <div class="feature-card"><i class="fas fa-shield-alt"></i><h4>Financial Security</h4><p>Protect your family's financial future with our comprehensive plans.</p></div>
+        <div class="feature-card"><i class="fas fa-taxi"></i><h4>Accident Cover</h4><p>Additional protection against accidental death and disability.</p></div>
+        <div class="feature-card"><i class="fas fa-piggy-bank"></i><h4>Savings & Investment</h4><p>Grow your wealth while ensuring life coverage.</p></div>
+    </section>
+</main>
+
+<!-- ======================================================== -->
+<!-- THIS IS THE CORRECTED MODAL SECTION -->
+<!-- ======================================================== -->
+<div id="planModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalPlanName"></h2>
+        <p id="modalPlanDesc"></p>
+        
+        <form id="planForm">
+            <div class="form-row">
+                <div class="form-group"><label for="userName">Full Name</label><input type="text" id="userName" required></div>
+                <div class="form-group"><label for="userAgeForm">Age</label><input type="number" id="userAgeForm" min="18" max="75" required></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="planTerm">Policy Term (Years)</label>
+                    <select id="planTerm" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="ppt">Premium Paying Term (PPT)</label>
+                    <input type="number" id="ppt" placeholder="e.g., 15" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sumAssured">Sum Assured (₹)</label>
+                <input type="number" id="sumAssured" min="200000" placeholder="e.g., 200000" required>
+            </div>
+            <button type="button" id="calculateBtn" class="btn">Calculate Premium</button>
+        </form>
+        
+        <div id="calculationResults" style="display: none;"></div>
+        
+        <!-- THIS DIV WAS MISSING. IT IS NOW ADDED. -->
+        <div id="modalContact" class="modal-contact" style="display: none;">
+             <button id="modalContactBtn" class="btn">Chat with Us for Details</button>
+        </div>
+        
+    </div>
+</div>
+
+<!-- <footer>
+    <div class="container">
+        <p>&copy; 2025 LIC Portal. All Rights Reserved.</p>
+    </div>
+</footer> -->
+<footer></footer>
+
+<script src="script.js"></script>
+</body>
+</html>

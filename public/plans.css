@@ -1,0 +1,105 @@
+/* =============================================
+   PLANS PAGE STYLESHEET (plans.css)
+   ============================================= */
+
+:root { --primary-color: #003366; --secondary-color: #ffc107; --white: #f5f5f5; --light-gray: #f2f2f2; --gray: #555555; --dark-color: #333333; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+body { background-color: var(--light-gray); color: var(--dark-color); line-height: 1.6; }
+a { text-decoration: none; }
+.container { width: 90%; max-width: 1200px; margin: 0 auto; opacity: 0; transform: translateY(20px); animation: fadeInUp 1s forwards; animation-delay: 0.2s; }
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+/* Header */
+header { background-color: var(--primary-color); color: var(--white); padding: 15px 0; border-bottom: 4px solid var(--secondary-color); }
+header .container { display: flex; align-items: center; justify-content: space-between; }
+header .logo p { font-size: 14px; color: var(--light-gray); margin: 0; }
+header nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
+header nav ul li a { color: white; font-weight: bold; padding: 5px 10px; border-radius: 4px; transition: 0.3s; }
+header nav ul li a:hover, header nav ul li a.active { background-color: var(--secondary-color); color: var(--primary-color); }
+
+/* Eligibility Check */
+.eligibility-check { background: var(--white); padding: 30px; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+.eligibility-check h3 { margin-bottom: 20px; font-size: 1.8rem; color: var(--primary-color); }
+.eligibility-form input { padding: 12px; width: 250px; border: 1px solid #ccc; border-radius: 8px; margin-right: 10px; font-size: 1rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
+.eligibility-form input:focus { border-color: var(--primary-color); box-shadow: 0 0 8px rgba(0, 51, 102, 0.2); }
+.btn { padding: 12px 22px; background-color: var(--primary-color); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: 0.3s; font-weight: bold; }
+.btn:hover { background-color: var(--secondary-color); color: var(--primary-color); }
+
+/* Plan Cards */
+.plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
+.plan-card { background: var(--white); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; }
+.plan-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+
+/* ============================================= */
+/* THIS IS THE CORRECTED SECTION */
+/* ============================================= */
+.plan-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
+    /* --- The Fix --- */
+    min-height: 80px;         /* Sets a consistent minimum height */
+    display: flex;            /* Activates Flexbox for alignment */
+    align-items: center;      /* Vertically centers the title text */
+    justify-content: center;  /* Horizontally centers the text */
+    text-align: center;       /* Ensures text is centered if it wraps */
+}
+/* ============================================= */
+
+.plan-header h3 { margin: 0; font-size: 1.2rem; color: white; }
+.plan-body { padding: 15px; flex-grow: 1; }
+.plan-body p { font-size: 0.9rem; color: var(--gray); margin-bottom: 15px; }
+.plan-features { list-style: none; padding-left: 0; text-align: left; }
+.plan-features li { margin-bottom: 8px; font-size: 0.9rem; }
+.plan-features li strong { color: var(--dark-color); }
+.plan-button { padding: 15px; text-align: right; margin-top: auto; }
+
+/* Features Section */
+.features { padding: 30px 0; text-align: center; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.section-title { font-size: 2rem; margin-bottom: 10px; color: var(--primary-color); grid-column: 1 / -1; }
+.feature-card { padding: 25px; background: var(--white); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: 0.3s; }
+.feature-card:hover { transform: translateY(-5px); }
+.feature-card i { font-size: 2.5rem; margin-bottom: 15px; color: var(--primary-color); }
+.feature-card h4 { margin-bottom: 10px; font-size: 1.2rem; color: var(--dark-color); }
+.feature-card p { font-size: 0.9rem; }
+
+/* Modal & Form */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); }
+.modal-content { background-color: var(--white); margin: 60px auto; padding: 20px 30px; border-radius: 12px; width: 90%; max-width: 600px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); position: relative; animation: slide-down 0.4s ease-out; }
+@keyframes slide-down { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.close { position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; color: #aaa; cursor: pointer; transition: color 0.3s; }
+.close:hover { color: var(--primary-color); }
+#modalPlanName { color: var(--primary-color); }
+#planForm { margin-top: 15px; }
+.form-row { display: flex; gap: 20px; margin-bottom: 15px; }
+.form-group { flex: 1; display: flex; flex-direction: column; }
+.form-group label { margin-bottom: 5px; font-weight: bold; }
+.form-group input, .form-group select { padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem; }
+.modal-contact { text-align: center; margin-top: 20px; }
+
+/* Calculation Results */
+#calculationResults h3 { text-align: center; border-bottom: 2px solid var(--secondary-color); padding-bottom: 10px; margin-bottom: 20px; color: var(--primary-color); }
+.results-details { margin-bottom: 20px; }
+.results-details .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 1rem; }
+.detail-row span:first-child { font-weight: bold; color: var(--dark-color); }
+.detail-row span:last-child { color: var(--gray); }
+.premium-section h4 { margin-top: 20px; margin-bottom: 10px; color: var(--primary-color); background-color: #e6f2ff; padding: 8px; border-radius: 4px; }
+.premium-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
+.premium-row .label { font-weight: bold; flex-basis: 35%; }
+.premium-row .breakdown { color: var(--gray); font-size: 0.9em; flex-basis: 35%; text-align: center; }
+.premium-row .total { font-weight: bold; flex-basis: 30%; text-align: right; }
+.disclaimer { text-align: center; font-size: 0.8em; color: var(--gray); margin-top: 20px; padding: 10px; background-color: #f9f9f9; border-radius: 4px; }
+
+/* Footer */
+footer { background-color: var(--primary-color); color: var(--white); text-align: center; padding: 20px 0; margin-top: 40px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    header .container { flex-direction: column; gap: 15px; }
+    .form-row, .eligibility-form { flex-direction: column; }
+    .eligibility-form input { width: 100%; margin: 0 0 10px 0; }
+    .eligibility-form button { width: 100%; }
+}

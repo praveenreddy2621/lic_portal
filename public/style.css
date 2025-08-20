@@ -1,0 +1,126 @@
+:root {
+    --primary-color: #003366;      /* Header/nav color */
+    --secondary-color: #ffc107;    /* Highlight color */
+    --white: #ffffff;
+    --light-gray: #f5f5f5;
+    --gray: #555555;
+    --dark-color: #333333;
+}
+
+/* Reset */
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--light-gray);
+    color: var(--dark-color);
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Header */
+header {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 15px 0;
+    border-bottom: 4px solid var(--secondary-color);
+}
+header .container { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;}
+header nav ul { list-style:none; display:flex; gap:20px; flex-wrap:wrap;}
+header nav ul li a {
+    color:white;
+    padding:5px 12px;
+    border-radius:5px;
+    transition:0.3s;
+}
+header nav ul li a.active,
+header nav ul li a:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Buttons */
+button, .btn {
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+button:hover, .btn:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Cards */
+.plan-card, .feature-card, .application-form {
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Hero Sections */
+.hero, .about-hero {
+    background: var(--white);
+    border-radius:10px;
+    padding:40px 20px;
+    text-align:center;
+    margin-bottom:20px;
+}
+.hero h2, .hero h3, .about-hero h2, .about-hero h3 {
+    color: var(--primary-color);
+}
+.hero p, .about-hero p {
+    color: var(--gray);
+}
+
+/* Features Section */
+.features { display:flex; gap:20px; flex-wrap:wrap;}
+.feature-card { text-align:center; transition:0.3s; }
+.feature-card i { font-size:2rem; color:var(--primary-color); margin-bottom:10px; }
+.feature-card:hover { transform: translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.15); }
+
+/* Forms */
+input, select, textarea {
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid var(--gray);
+    border-radius:8px;
+    font-size:1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary-color);
+    outline:none;
+    box-shadow:0 0 8px rgba(0,64,128,0.2);
+}
+
+/* Social Media & Mission Sections */
+.social-links { display:flex; gap:15px; flex-wrap:wrap; }
+.social-links a { color:var(--primary-color); font-weight:500; transition:0.3s; }
+.social-links a:hover { color: var(--secondary-color); }
+.mission-section ul { margin-top:20px; list-style:disc; padding-left:20px; color:var(--gray);}
+.mission-section h3 { color: var(--primary-color); margin-bottom:10px; }
+
+/* Footer */
+footer { background: var(--primary-color); color:white; text-align:center; padding:20px 0; margin-top:40px; }
+
+/* Responsive */
+@media(max-width:768px){
+    .about-hero, .features { flex-direction: column; }
+}

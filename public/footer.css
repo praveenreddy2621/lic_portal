@@ -1,0 +1,107 @@
+
+footer {
+    background: var(--primary-color);
+    color: #d3d3d3;
+    position: relative;
+    margin-top: 40px; 
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap; 
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 20px;
+    min-width: 250px; 
+}
+
+/* Section 1: About */
+.footer-section.about .logo-text span {
+    color: var(--secondary-color); 
+}
+.footer-section.about .contact span {
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+}
+
+/* ============================================= */
+/* THIS IS THE CORRECTED SECTION */
+/* ============================================= */
+.footer-section.about .socials a {
+    border: 1px solid gray;
+    width: 45px;
+    height: 45px;           /* Make width and height equal */
+    line-height: 43px;      /* Vertically center the icon */
+    margin-right: 5px;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.3em;
+    border-radius: 50%;     /* This creates the circle */
+    transition: all .3s;
+    color: #d3d3d3;
+    text-decoration: none;
+}
+/* ============================================= */
+
+.footer-section.about .socials a:hover {
+    border-color: var(--secondary-color);
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Section 2: Quick Links */
+.footer-section.links h2 {
+    color: white;
+}
+.footer-section.links ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-section.links ul a {
+    display: block;
+    margin-bottom: 10px;
+    transition: all .3s;
+    color: #d3d3d3;
+    text-decoration: none;
+}
+.footer-section.links ul a:hover {
+    color: white;
+    padding-left: 10px;
+}
+
+/* Section 3: Contact Form */
+.footer-section.contact-form h2 {
+    color: white;
+}
+.footer-section.contact-form .contact-input {
+    background: #272727;
+    color: #bebdbd;
+    margin-bottom: 10px;
+    line-height: 1.5rem;
+    padding: .7rem 1.2rem;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+}
+.footer-section.contact-form .contact-btn {
+    background: #0056b3; 
+    color: white;
+    width: 100%;
+    float: right;
+}
+
+/* Bottom Copyright Bar */
+.footer-bottom {
+    background: #002244; 
+    color: #686868;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    padding-top: 15px;
+}

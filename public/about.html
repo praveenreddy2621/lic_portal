@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIC Portal - About Us</title>
+    <link rel="stylesheet" href="about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="footer.css">
+
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>LIC PORTAL</h1>
+            <p>Your Trusted Life Insurance Partner</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="plans.html">Plans</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li id="welcome-message"></li>
+                <li id="auth-link"></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section class="container about-hero">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About LIC Portal</h2>
+                <p>
+                    LIC Portal is a digital platform that connects customers with licensed LIC agents,
+                    making life insurance accessible, reliable, and transparent. Our mission is to
+                    provide financial security and guidance to every family.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form -->
+    <section class="container" id="application-form">
+        <h2>Apply for a Policy</h2>
+        <form id="insuranceForm">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="number" id="age" placeholder="Age" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+
+            <label for="plan">Plan Interested:</label>
+            <select id="plan" required>
+                <option value="" disabled selected>Select a plan</option>
+                <!-- This will now be populated by script.js -->
+            </select>
+
+            <label for="term">Policy Term (Years):</label>
+            <select id="term" required>
+                <option value="" disabled selected>Select term</option>
+                <option value="5">5 Years</option>
+                <option value="10">10 Years</option>
+                <option value="15">15 Years</option>
+                <option value="20">20 Years</option>
+                <option value="25">25 Years</option>
+                <option value="30">30 Years</option>
+            </select>
+
+            <input type="number" id="sumAssured" min="200000" placeholder="Sum Assured (Min. 2 Lakhs)" required>
+            <button type="submit">Submit Application</button>
+        </form>
+    </section>
+
+    <!-- Contact + Socials Layout -->
+    <section class="container contact-social-container">
+        <div class="left-section">
+            <div class="social-media-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/917095394483?text=Hello%20LIC%20Portal" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="mission-section">
+                <h3>Why Choose LIC Portal?</h3>
+                <ol>
+                    <li>Trusted LIC agents providing expert guidance.</li>
+                    <li>Transparent and easy-to-understand insurance plans.</li>
+                    <li>Secure platform for your financial decisions.</li>
+                    <li>Quick support and follow-up services.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="right-section">
+            <h3>Contact Information</h3>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> +91 70953 94483</p>
+                <p><i class="fas fa-envelope"></i> support@licportal.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 LIC Road, Hyderabad, India</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- <footer>
+    <div class="container footer-container">
+        <p>&copy; 2025 LIC Portal. All rights reserved.</p>
+    </div>
+</footer> -->
+<footer></footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+

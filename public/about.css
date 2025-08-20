@@ -1,0 +1,165 @@
+/* =============================================
+   STYLES FOR about.html PAGE
+   ============================================= */
+
+/* Import the base styles to maintain consistency */
+@import url('index.css');
+
+/* About Hero Section */
+.about-hero {
+    background: var(--white);
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.about-content {
+    text-align: center;
+}
+
+.about-text h2 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    color: var(--gray);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Application Form Section */
+#application-form {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 40px;
+    margin-top: 40px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+#application-form h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+#insuranceForm {
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+#insuranceForm input,
+#insuranceForm select,
+#insuranceForm button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+#insuranceForm label {
+    text-align: left;
+    grid-column: 1 / -1; /* Make label span both columns */
+    margin-top: 10px;
+    margin-bottom: -5px;
+    font-weight: bold;
+}
+
+#insuranceForm button {
+    grid-column: 1 / -1; /* Make button span both columns */
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#insuranceForm button:hover {
+    transform: scale(1.02);
+}
+
+/* Contact + Socials Layout */
+.contact-social-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.left-section, .right-section {
+    flex: 1;
+    min-width: 280px;
+    background: var(--white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.left-section h3, .right-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+}
+
+/* Social Media Section */
+.social-links {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.social-links a {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+/* Mission Section */
+.mission-section ol {
+    list-style-position: inside;
+    text-align: left;
+    padding-left: 0;
+}
+
+.mission-section li {
+    margin-bottom: 10px;
+    color: var(--gray);
+}
+
+/* Contact Info Section */
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: var(--dark-color);
+}
+
+.contact-info i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+/* Responsive adjustments for the form */
+@media (max-width: 600px) {
+    #insuranceForm {
+        grid-template-columns: 1fr;
+    }
+}
