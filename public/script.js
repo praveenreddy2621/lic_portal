@@ -1,5 +1,5 @@
 // =============================================
-// UNIFIED MASTER SCRIPT (Final, Complete Version with Admin Link)
+// UNIFIED MASTER SCRIPT (Final, Complete & Corrected Version)
 // This single file controls index.html, plans.html, about.html, and services.html
 // =============================================
 
@@ -8,12 +8,11 @@ let planModal, modalPlanName, modalPlanDesc, calculateBtn, closeModalBtn, result
 
 // --- Main Initializer ---
 document.addEventListener('DOMContentLoaded', async () => {
-    // 1. Fetch all policy data from the server as soon as any page loads
-    await fetchPolicies();
+    // 1. Fetch data and templates once (Corrected: No duplicate calls)
     await fetchPolicies();
     await loadFooter();
     
-    // 2. Define global variables for DOM elements that might exist on the page
+    // 2. Define global variables for DOM elements
     planModal = document.getElementById('planModal');
     modalPlanName = document.getElementById('modalPlanName');
     modalPlanDesc = document.getElementById('modalPlanDesc');
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     planForm = document.getElementById('planForm');
     modalContactDiv = document.getElementById('modalContact');
     
-    // 3. Run specific setup functions based on which page is currently loaded
+    // 3. Run specific setup functions based on the current page
     if (document.getElementById('allPlans')) {
         initializeHomePage();
     }
@@ -34,8 +33,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         initializeAboutPage();
     }
 
-    // 4. Run universal features that apply to all pages
-    setupAuthLink(); // Manages the Welcome message and Login/Logout button
+    // 4. Run universal features on all pages
+    setupAuthLink();
     
     // Universal event listeners for the calculator modal
     if(closeModalBtn) closeModalBtn.addEventListener('click', () => planModal.style.display='none');
@@ -46,14 +45,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+// --- TEMPLATE & DATA LOADING FUNCTIONS ---
+
 async function loadFooter() {
     try {
         const response = await fetch('footer.html');
+        if (!response.ok) return;
         const footerHTML = await response.text();
         const footerElement = document.querySelector('footer');
         if (footerElement) {
             footerElement.innerHTML = footerHTML;
-            // Attach event listener for the new form in the footer
             const footerForm = document.getElementById('footerContactForm');
             if (footerForm) {
                 footerForm.addEventListener('submit', handleFooterContact);
@@ -64,20 +65,6 @@ async function loadFooter() {
     }
 }
 
-function handleFooterContact(e) {
-    e.preventDefault();
-    const email = document.getElementById('footer-email').value;
-    const message = document.getElementById('footer-message').value;
-    const fullMessage = `*New Footer Contact Form Submission*\n\n*Email:* ${email}\n*Message:* ${message}`;
-    const encodedMessage = encodeURIComponent(fullMessage);
-    const agentNumber = "917095394483"; // Your WhatsApp number
-    window.open(`https://wa.me/${agentNumber}?text=${encodedMessage}`, "_blank");
-    alert("Thank you for your message! Please confirm sending it in WhatsApp.");
-    e.target.reset();
-}
-
-
-// Fetches the master list of policies from our backend server
 async function fetchPolicies() {
     try {
         const response = await fetch('/api/policies');
@@ -87,35 +74,22 @@ async function fetchPolicies() {
     }
 }
 
-// ========================================================
-// THIS IS THE UPDATED FUNCTION
-// It now checks the user's role and adds a link for admins.
-// ========================================================
+// --- UNIVERSAL FUNCTIONS ---
+
 async function setupAuthLink() {
     const authLinkEl = document.getElementById('auth-link');
     const welcomeEl = document.getElementById('welcome-message');
     const token = localStorage.getItem('token');
-
     if (token && authLinkEl && welcomeEl) {
         try {
-            const response = await fetch('/api/user/profile', {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
+            const response = await fetch('/api/user/profile', { headers: { 'Authorization': `Bearer ${token}` } });
             if (response.ok) {
                 const user = await response.json();
-                
-                // --- THIS IS THE NEW LOGIC ---
-                // Check the user's role to decide what to display
                 if (user.role === 'admin') {
-                    // If user is an admin, make the welcome message a link to the dashboard
                     welcomeEl.innerHTML = `<a href="admin.html" style="color: var(--secondary-color); text-decoration: none;">Welcome, ${user.username}! (Admin)</a>`;
                 } else {
-                    // If user is a regular user, display plain text
                     welcomeEl.innerHTML = `<span style="color: var(--secondary-color);">Welcome, ${user.username}!</span>`;
                 }
-                // --- END OF NEW LOGIC ---
-
-                // Display the Logout button for all logged-in users
                 authLinkEl.innerHTML = `<a href="#" id="logout-btn">Logout</a>`;
                 document.getElementById('logout-btn').addEventListener('click', (e) => {
                     e.preventDefault();
@@ -123,7 +97,6 @@ async function setupAuthLink() {
                     window.location.href = 'login.html';
                 });
             } else {
-                // Token is invalid, log the user out
                 localStorage.removeItem('token');
                 authLinkEl.innerHTML = `<a href="login.html">Login</a>`;
                 welcomeEl.innerHTML = '';
@@ -134,17 +107,13 @@ async function setupAuthLink() {
             welcomeEl.innerHTML = '';
         }
     } else if (authLinkEl) {
-        // User is not logged in, show Login button
         authLinkEl.innerHTML = `<a href="login.html">Login</a>`;
         if (welcomeEl) welcomeEl.innerHTML = '';
     }
 }
-// ========================================================
 
+// --- PAGE-SPECIFIC INITIALIZERS ---
 
-// --- PAGE-SPECIFIC SETUP FUNCTIONS ---
-
-// Sets up the homepage (index.html)
 function initializeHomePage() {
     const allPlansDiv = document.getElementById('allPlans');
     if (allPlansDiv) {
@@ -155,8 +124,6 @@ function initializeHomePage() {
             allPlansDiv.innerHTML = "<p>Could not load plans. Please check the server connection.</p>";
         }
     }
-    
-    // Initialize the quote slider
     const quotes = document.querySelectorAll('.quote-slide p');
     if (quotes.length > 0) {
         let currentQuoteIndex = 0;
@@ -169,20 +136,16 @@ function initializeHomePage() {
     }
 }
 
-// Sets up the plans page (plans.html)
 function initializePlansPage() {
     const checkBtn = document.getElementById('checkEligibilityBtn');
-    if (checkBtn) {
-        checkBtn.addEventListener('click', showEligiblePlans);
-    }
+    if (checkBtn) checkBtn.addEventListener('click', showEligiblePlans);
 }
 
-// Sets up the about page (about.html)
 function initializeAboutPage() {
     const planDropdown = document.getElementById('plan');
     const insuranceForm = document.getElementById('insuranceForm');
-
     if (planDropdown && LIC_PLANS.length > 0) {
+        planDropdown.innerHTML = '<option value="" disabled selected>Select a plan</option>';
         LIC_PLANS.forEach(plan => {
             const option = document.createElement('option');
             option.value = plan.name;
@@ -190,7 +153,6 @@ function initializeAboutPage() {
             planDropdown.appendChild(option);
         });
     }
-
     if (insuranceForm) {
         insuranceForm.addEventListener("submit", function(e) {
             e.preventDefault();
@@ -204,22 +166,19 @@ function initializeAboutPage() {
             const message = `*New Insurance Application*\n\n*Name:* ${name}\n*Age:* ${age}\n*Email:* ${email}\n*Phone:* ${phone}\n*Plan Interested In:* ${plan}\n*Sum Assured:* ₹${parseInt(sumAssured).toLocaleString('en-IN')}\n*Policy Term:* ${term} years`;
             const encodedMessage = encodeURIComponent(message);
             const agentNumber = "917095394483";
-            window.open(`https://wa.me/${agentNumber}?text=${encodedMessage}`, "_blank");
-            alert("Thank you! Your application details have been prepared. Please confirm in WhatsApp.");
+            window.open(`https://wa.me/${agentNumber}?text=${encodedMessage}`, "_self");
+            alert("Redirecting to WhatsApp. Please review your application details and press 'Send'.");
             this.reset();
         });
     }
 }
 
-
 // --- CORE FUNCTIONALITY ---
 
-// Filters and displays plans based on age on the plans page
 function showEligiblePlans() {
     const ageInput = document.getElementById('userAgeCheck');
     const eligiblePlansDiv = document.getElementById('eligiblePlans');
     const age = parseInt(ageInput.value);
-    
     eligiblePlansDiv.innerHTML = "";
     if (!age || age < 0 || age > 100) {
         eligiblePlansDiv.innerHTML = `<p style="color: red; text-align: center;">Please enter a valid age.</p>`;
@@ -233,31 +192,20 @@ function showEligiblePlans() {
     eligiblePlans.forEach(plan => eligiblePlansDiv.appendChild(createPlanCard(plan)));
 }
 
-// Creates the HTML for a single policy card
 function createPlanCard(plan) {
     const card = document.createElement('div');
     card.className = 'plan-card';
     const buttonText = plan.rateTable ? "View & Calculate" : "View Details";
     const bonusFeature = plan.bonus ? `<p><strong>Bonus:</strong> ${plan.bonus}</p>` : '';
-    
-    card.innerHTML = `
-        <div class="plan-header"><h3>${plan.name}</h3></div>
-        <div class="plan-body">
-            <p>${plan.description}</p>
-            ${bonusFeature}
-        </div>
-        <div class="plan-button"><button class="btn premium-btn">${buttonText}</button></div>
-    `;
+    card.innerHTML = `<div class="plan-header"><h3>${plan.name}</h3></div><div class="plan-body"><p>${plan.description}</p>${bonusFeature}</div><div class="plan-button"><button class="btn premium-btn">${buttonText}</button></div>`;
     card.querySelector('.premium-btn').addEventListener('click', () => openPlanModal(plan));
     return card;
 }
 
-// Opens and populates the calculator modal
 function openPlanModal(plan){
     currentPlan = plan;
     modalPlanName.textContent = plan.name;
     modalPlanDesc.textContent = plan.description;
-    
     if (plan.rateTable) {
         planForm.style.display = 'block';
         if(modalContactDiv) modalContactDiv.style.display = 'none';
@@ -273,13 +221,11 @@ function openPlanModal(plan){
         planForm.style.display = 'none';
         if(modalContactDiv) modalContactDiv.style.display = 'block';
     }
-    
     planForm.reset();
     if(resultsDiv) resultsDiv.style.display = 'none';
     if(planModal) planModal.style.display = 'block';
 }
 
-// The main premium calculation logic
 function calculatePremium() {
     if (!currentPlan || !currentPlan.rateTable) {
         alert("Calculation is not available for this plan.");
@@ -290,7 +236,6 @@ function calculatePremium() {
     const term = parseInt(document.getElementById('planTerm').value);
     const ppt = parseInt(document.getElementById('ppt').value);
     const basicSumAssured = parseFloat(document.getElementById('sumAssured').value);
-
     if (!userName || isNaN(age) || isNaN(term) || isNaN(ppt) || isNaN(basicSumAssured)) {
         alert("Please fill all required fields correctly.");
         return;
@@ -331,8 +276,6 @@ function calculatePremium() {
     resultsDiv.style.display = 'block';
     document.getElementById('whatsappBtn').addEventListener('click', contactAgentWithDetails);
 }
-
-// --- CONTACT FUNCTIONS ---
 
 function contactAgentWithDetails() {
     const agentPhoneNumber = '917095394483';

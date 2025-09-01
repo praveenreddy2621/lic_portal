@@ -4,6 +4,7 @@ const mysql = require('mysql2');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = 3000;
@@ -18,6 +19,17 @@ const db = mysql.createConnection({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
 }).promise();
+
+
+// --- Nodemailer Setup ---
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
 
 // --- API ROUTES ---
 
@@ -97,6 +109,70 @@ app.get('/api/user/profile', verifyToken, async (req, res) => {
         res.status(500).json({ message: "Server error." });
     }
 });
+
+
+
+// NEW: Request Password Reset Link
+// ==========================================================
+app.post('/api/forgot-password', async (req, res) => {
+    const { email } = req.body;
+    try {
+        const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+        if (rows.length === 0) {
+            // SECURITY: Don't reveal if the user exists.
+            return res.json({ message: "If a user with that email exists, a reset link has been sent." });
+        }
+        const user = rows[0];
+
+        // Create a short-lived reset token
+        const resetToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '15m' });
+        const resetLink = `http://localhost:3000/reset-password.html?token=${resetToken}`;
+
+        // Send the email
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: user.email,
+            subject: 'Your LIC Portal Password Reset Link',
+            html: `<p>Hello ${user.username},</p>
+                   <p>Please click the link below to reset your password. This link is valid for 15 minutes.</p>
+                   <a href="${resetLink}">Reset Password</a>`
+        });
+
+        res.json({ message: "If a user with that email exists, a reset link has been sent." });
+
+    } catch (error) {
+        console.error("Forgot Password Error:", error);
+        res.status(500).json({ message: "An error occurred." });
+    }
+});
+
+// ==========================================================
+// NEW: Handle the Actual Password Reset
+// ==========================================================
+app.post('/api/reset-password', async (req, res) => {
+    const { token, newPassword } = req.body;
+    if (!token || !newPassword) {
+        return res.status(400).json({ message: "All fields are required." });
+    }
+    try {
+        // Verify the short-lived token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const userId = decoded.userId;
+
+        // Hash the new password and update the database
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await db.query('UPDATE users SET password = ? WHERE id = ?', [hashedPassword, userId]);
+
+        res.json({ message: "Password has been reset successfully! You can now log in." });
+
+    } catch (error) {
+        // This will catch expired or invalid tokens
+        res.status(401).json({ message: "Invalid or expired reset link. Please try again." });
+    }
+});
+
+
+
 
 
 // --- ADMIN ONLY ROUTES ---

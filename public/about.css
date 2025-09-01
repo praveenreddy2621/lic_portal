@@ -1,36 +1,54 @@
 /* =============================================
-   STYLES FOR about.html PAGE
+   STYLES FOR about.html PAGE - FINAL VERSION
    ============================================= */
 
 /* Import the base styles to maintain consistency */
 @import url('index.css');
 
-/* About Hero Section */
+/* =============================================
+   UPDATED STYLES FOR TWO-COLUMN HERO SECTION
+   ============================================= */
 .about-hero {
+    display: flex;            /* Activates Flexbox for side-by-side layout */
+    align-items: center;      /* Vertically aligns the image and text */
+    gap: 40px;                /* Creates space between the two columns */
     background: var(--white);
-    padding: 30px;
+    padding: 40px;
     margin-top: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-.about-content {
-    text-align: center;
+/* The image container (left column) */
+.about-image {
+    flex: 1; /* Each column will take up equal space */
+    min-width: 280px;
+}
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents the image from being distorted */
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
+/* The text container (right column) */
+.about-text {
+    flex: 1; /* Each column will take up equal space */
+}
 .about-text h2 {
     font-size: 2.2rem;
     color: var(--primary-color);
     margin-bottom: 15px;
+    line-height: 1.3;
 }
-
 .about-text p {
     font-size: 1.1rem;
     color: var(--gray);
-    max-width: 800px;
-    margin: 0 auto;
     line-height: 1.7;
+    margin-bottom: 1rem; /* Adds space between paragraphs */
 }
+/* ============================================= */
 
 /* Application Form Section */
 #application-form {
@@ -41,12 +59,10 @@
     border-radius: 12px;
     text-align: center;
 }
-
 #application-form h2 {
     font-size: 2rem;
     margin-bottom: 25px;
 }
-
 #insuranceForm {
     max-width: 600px;
     margin: 0 auto;
@@ -54,7 +70,6 @@
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
-
 #insuranceForm input,
 #insuranceForm select,
 #insuranceForm button {
@@ -64,17 +79,15 @@
     border: 1px solid #ccc;
     font-size: 1rem;
 }
-
 #insuranceForm label {
     text-align: left;
-    grid-column: 1 / -1; /* Make label span both columns */
+    grid-column: 1 / -1;
     margin-top: 10px;
     margin-bottom: -5px;
     font-weight: bold;
 }
-
 #insuranceForm button {
-    grid-column: 1 / -1; /* Make button span both columns */
+    grid-column: 1 / -1;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     border: none;
@@ -82,7 +95,6 @@
     cursor: pointer;
     transition: transform 0.2s;
 }
-
 #insuranceForm button:hover {
     transform: scale(1.02);
 }
@@ -95,7 +107,6 @@
     margin-top: 40px;
     padding: 20px;
 }
-
 .left-section, .right-section {
     flex: 1;
     min-width: 280px;
@@ -104,45 +115,35 @@
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
-
 .left-section h3, .right-section h3 {
     color: var(--primary-color);
     margin-bottom: 20px;
     border-bottom: 2px solid var(--secondary-color);
     padding-bottom: 10px;
 }
-
-/* Social Media Section */
 .social-links {
     display: flex;
     gap: 20px;
     margin-bottom: 30px;
 }
-
 .social-links a {
     color: var(--primary-color);
     font-size: 1.8rem;
     transition: color 0.3s, transform 0.3s;
 }
-
 .social-links a:hover {
     color: var(--secondary-color);
     transform: scale(1.1);
 }
-
-/* Mission Section */
 .mission-section ol {
     list-style-position: inside;
     text-align: left;
     padding-left: 0;
 }
-
 .mission-section li {
     margin-bottom: 10px;
     color: var(--gray);
 }
-
-/* Contact Info Section */
 .contact-info p {
     display: flex;
     align-items: center;
@@ -151,13 +152,59 @@
     font-size: 1rem;
     color: var(--dark-color);
 }
-
 .contact-info i {
     color: var(--primary-color);
     font-size: 1.2rem;
 }
 
-/* Responsive adjustments for the form */
+/* Styles for Payment Scanner */
+.contact-payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+}
+.payment-scanner {
+    text-align: center;
+}
+.payment-scanner img {
+    max-width: 150px;
+    width: 100%;
+    border: 5px solid var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.payment-scanner p {
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--dark-color);
+    font-size: 0.9rem;
+}
+
+/* =============================================
+   RESPONSIVE STYLES
+   ============================================= */
+@media (max-width: 992px) {
+    .contact-payment-grid {
+        grid-template-columns: 1fr;
+    }
+    .payment-scanner {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Responsive styles for the hero section */
+    .about-hero {
+        flex-direction: column; /* Stacks the image and text on mobile */
+        text-align: center;
+        padding: 30px 20px;
+    }
+    .about-text h2 {
+        font-size: 1.8rem;
+    }
+}
+
 @media (max-width: 600px) {
     #insuranceForm {
         grid-template-columns: 1fr;

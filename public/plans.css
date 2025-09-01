@@ -1,6 +1,4 @@
-/* =============================================
-   PLANS PAGE STYLESHEET (plans.css)
-   ============================================= */
+
 
 :root { --primary-color: #003366; --secondary-color: #ffc107; --white: #f5f5f5; --light-gray: #f2f2f2; --gray: #555555; --dark-color: #333333; }
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
@@ -102,4 +100,86 @@ footer { background-color: var(--primary-color); color: var(--white); text-align
     .form-row, .eligibility-form { flex-direction: column; }
     .eligibility-form input { width: 100%; margin: 0 0 10px 0; }
     .eligibility-form button { width: 100%; }
+}
+
+
+
+/* =============================================
+   RESPONSIVE MEDIA QUERIES for Plans Page
+   ============================================= */
+
+@media (max-width: 768px) {
+    /* --- Eligibility Form --- */
+    .eligibility-form {
+        flex-direction: column; /* Stack the input and button */
+        gap: 10px;
+    }
+    .eligibility-form input {
+        width: 100%;
+        margin-right: 0;
+    }
+    .eligibility-form button {
+        width: 100%;
+    }
+
+    /* --- Features Section --- */
+    .features {
+        grid-template-columns: 1fr; /* Stack feature cards */
+    }
+}
+/* =============================================
+   RESPONSIVE MEDIA QUERIES
+   These rules only apply on screens 768px or smaller (tablets and phones)
+   ============================================= */
+
+@media (max-width: 768px) {
+    /* --- Header --- */
+    header .container {
+        flex-direction: column; /* Stack logo and nav vertically */
+        gap: 20px;
+        text-align: center;
+    }
+    header nav ul {
+        flex-wrap: wrap; /* Allow nav items to wrap if needed */
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* --- Hero Section --- */
+    .hero-section {
+        flex-direction: column; /* Stack image and text vertically */
+        text-align: center;
+        padding: 30px 20px;
+    }
+    .hero-buttons {
+        justify-content: center; /* Center the buttons */
+    }
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    /* --- Plan Cards Grid --- */
+    .plans-grid {
+        grid-template-columns: 1fr; /* Force one column for plan cards */
+    }
+
+    /* --- Calculator Modal Form --- */
+    .form-row {
+        flex-direction: column; /* Stack form fields vertically */
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Specific tweaks for very small mobile screens */
+    .hero-buttons {
+        flex-direction: column; /* Stack the two hero buttons vertically */
+        align-items: center;
+    }
+    header nav ul {
+        gap: 5px;
+    }
+    header nav ul li a {
+        padding: 5px;
+    }
 }
